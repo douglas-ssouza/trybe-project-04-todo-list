@@ -91,19 +91,35 @@ function clearList() {
 btnClear.addEventListener('click', clearList);
 
 function moveUp() {
-  let selected = document.querySelector('.selected');
-  let anterior = selected.previousSibling;
-  if (selected != lista.firstElementChild && typeof(selected) !== 'undefined') {
-    lista.insertBefore(selected, anterior);
+  let move = false;
+  for (const item of lista.children) {
+    move = isSelected(item.classList);
+    if (move) break;
+  }
+
+  if (move) {
+    let selected = document.querySelector('.selected');
+    let anterior = selected.previousSibling;
+    if (selected != lista.firstElementChild) {
+      lista.insertBefore(selected, anterior);
+    }
   }
 }
 btnUp.addEventListener('click', moveUp);
 
-function moveDown() {
-  let selected = document.querySelector('.selected');
-  let proximo = selected.nextSibling;
-  if (selected != lista.lastElementChild && typeof(selected) !== 'undefined') {
-    lista.insertBefore(proximo, selected);
+function moveDown() {  
+  let move =  false;
+  for (const item of lista.children) {
+    move = isSelected(item.classList);
+    if (move) break;
+  }
+
+  if (move) {
+    let selected = document.querySelector('.selected');
+    let proximo = selected.nextSibling;
+    if (selected != lista.lastElementChild) {
+      lista.insertBefore(proximo, selected);
+    }
   }
 }
 btnDown.addEventListener('click', moveDown);

@@ -47,7 +47,7 @@ function completeTask(event) {
 lista.addEventListener('dblclick', completeTask)
 
 function clearList() {
-  for (const index = lista.children.length - 1; index >= 0; index -= 1) {
+  for (let index = lista.children.length - 1; index >= 0; index -= 1) {
     lista.removeChild(lista.children[index]);
   }
 }

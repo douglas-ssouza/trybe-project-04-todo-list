@@ -14,9 +14,13 @@ function addTask() {
   itemLista.innerText = texto;
   lista.appendChild(itemLista);
   input.value = '';
-  input.blur();
 }
 btnAdd.addEventListener('click', addTask);
+input.addEventListener('keyup', function() {
+  if (event.keyCode === 13) {
+    btnAdd.click();
+  }
+}) 
 
 function removeSelected() {
   for (const item of lista.children) {
@@ -85,6 +89,24 @@ function clearList() {
   }
 }
 btnClear.addEventListener('click', clearList);
+
+function moveUp() {
+  let selected = document.querySelector('.selected');
+  let anterior = selected.previousSibling;
+  if (selected != lista.firstElementChild && typeof(selected) !== 'undefined') {
+    lista.insertBefore(selected, anterior);
+  }
+}
+btnUp.addEventListener('click', moveUp);
+
+function moveDown() {
+  let selected = document.querySelector('.selected');
+  let proximo = selected.nextSibling;
+  if (selected != lista.lastElementChild && typeof(selected) !== 'undefined') {
+    lista.insertBefore(proximo, selected);
+  }
+}
+btnDown.addEventListener('click', moveDown);
 
 function saveTasks() {
   localStorage.setItem('items', lista.innerHTML);

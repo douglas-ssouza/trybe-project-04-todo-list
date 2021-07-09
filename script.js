@@ -94,14 +94,13 @@ function moveUp() {
   let move = false;
   for (const item of lista.children) {
     move = isSelected(item.classList);
-    if (move) break;
-  }
-
-  if (move) {
-    let selected = document.querySelector('.selected');
-    let anterior = selected.previousSibling;
-    if (selected != lista.firstElementChild) {
-      lista.insertBefore(selected, anterior);
+    if (move) {
+      let selected = document.querySelector('.selected');
+      let anterior = selected.previousSibling;
+      if (selected != lista.firstElementChild) {
+        lista.insertBefore(selected, anterior);
+      }
+      break;
     }
   }
 }
@@ -111,14 +110,13 @@ function moveDown() {
   let move =  false;
   for (const item of lista.children) {
     move = isSelected(item.classList);
-    if (move) break;
-  }
-
-  if (move) {
-    let selected = document.querySelector('.selected');
-    let proximo = selected.nextSibling;
-    if (selected != lista.lastElementChild) {
-      lista.insertBefore(proximo, selected);
+    if (move) {
+      let selected = document.querySelector('.selected');
+      let proximo = selected.nextSibling;
+      if (selected != lista.lastElementChild) {
+        lista.insertBefore(proximo, selected);
+      }
+      break;
     }
   }
 }

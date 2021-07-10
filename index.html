@@ -4,23 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>To Do List</title>
 </head>
 <body>
-  <header>
-    <h1>Minha Lista de Tarefas</h1>
-  </header>
+  <main>
+    <header>
+      <h1>Minha Lista de Tarefas</h1>
+    </header>
 
-  <p id="funcionamento">Clique duas vezes em um item para marcá-lo como completo</p>
-  <input type="text" id="texto-tarefa">
-  <ol id="lista-tarefas"></ol>
-  <button id="criar-tarefa">Adicionar</button>
-  <button id="apaga-tudo">Limpar</button>
-  <button id="remover-finalizados">Remover completos</button>
-  <button id="salvar-tarefas">Salvar</button>
-  <button id="mover-cima">cima</button>
-  <button id="mover-baixo">baixo</button>
-  <button id="remover-selecionado">Remover selecionado</button>
+    <p id="funcionamento">Clique duas vezes em um item para marcá-lo como completo</p>
+    <div class="input-container">
+      <input type="text" id="texto-tarefa">
+      <button id="criar-tarefa">Adicionar</button>
+    </div>
+    <ol id="lista-tarefas"></ol>
+    <div class="button-container">
+      <button id="apaga-tudo">Limpar</button>
+      <button id="remover-finalizados">Remover completos</button>
+      <button id="salvar-tarefas">Salvar</button>
+      <button id="mover-cima">&#x2B06;</button>
+      <button id="mover-baixo">&#x2B07;</button>
+      <button id="remover-selecionado">Remover selecionado</button>
+    </div>
+  </main>
   
   <script src="script.js"></script>
 </body>

@@ -20,7 +20,7 @@ input.addEventListener('keyup', function() {
   if (event.keyCode === 13) {
     btnAdd.click();
   }
-}) 
+});
 
 function removeSelected() {
   for (const item of lista.children) {
@@ -29,7 +29,7 @@ function removeSelected() {
 }
 
 function selectItem(event) {
-  removeSelected()
+  removeSelected();
   event.target.classList.add('selected');
 }
 lista.addEventListener('click', selectItem);
@@ -45,7 +45,7 @@ function isCompleted(classes) {
 
 function isSelected(classes) {
   for (const classe of classes) {
-    if (classe === 'selected'){
+    if (classe === 'selected') {
       return true;
     }
   }
@@ -63,16 +63,15 @@ function removeSeleceted() {
 btnRemSelected.addEventListener('click', removeSeleceted);
 
 function completeTask(event) {
-  completed = isCompleted(event.target.classList);
+  const completed = isCompleted(event.target.classList);
 
   if (completed) {
     event.target.classList.remove('completed');
   } else {
-    event.target.classList.add('completed')
+    event.target.classList.add('completed');
   }
 }
-lista.addEventListener('dblclick', completeTask)
-
+lista.addEventListener('dblclick', completeTask);
 
 function removeCompleted() {
   for (let index = lista.children.length - 1; index >= 0; index -= 1) {
@@ -95,9 +94,9 @@ function moveUp() {
   for (const item of lista.children) {
     move = isSelected(item.classList);
     if (move) {
-      let selected = document.querySelector('.selected');
-      let anterior = selected.previousSibling;
-      if (selected != lista.firstElementChild) {
+      const selected = document.querySelector('.selected');
+      const anterior = selected.previousSibling;
+      if (selected !== lista.firstElementChild) {
         lista.insertBefore(selected, anterior);
       }
       break;
@@ -106,14 +105,14 @@ function moveUp() {
 }
 btnUp.addEventListener('click', moveUp);
 
-function moveDown() {  
-  let move =  false;
+function moveDown() {
+  let move = false;
   for (const item of lista.children) {
     move = isSelected(item.classList);
     if (move) {
-      let selected = document.querySelector('.selected');
-      let proximo = selected.nextSibling;
-      if (selected != lista.lastElementChild) {
+      const selected = document.querySelector('.selected');
+      const proximo = selected.nextSibling;
+      if (selected !== lista.lastElementChild) {
         lista.insertBefore(proximo, selected);
       }
       break;

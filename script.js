@@ -90,21 +90,34 @@ function clearList() {
   }
 }
 
+function getSelected() {
+  for (const item of lista.children) {
+    if (isSelected(item.classList)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // Move o elemento selecionado para cima na lista
 function moveUp() {
-  const selected = document.querySelector('.selected');
-  const anterior = selected.previousSibling;
-  if (selected !== lista.firstElementChild) {
-    lista.insertBefore(selected, anterior);
+  if (getSelected()) {
+    const selected = document.querySelector('.selected');
+    const anterior = selected.previousSibling;
+    if (selected !== lista.firstElementChild) {
+      lista.insertBefore(selected, anterior);
+    }
   }
 }
 
 // Move o elemento selecionado para baixo na lista
 function moveDown() {
-  const selected = document.querySelector('.selected');
-  const proximo = selected.nextSibling;
-  if (selected !== lista.lastElementChild) {
-    lista.insertBefore(proximo, selected);
+  if (getSelected()) {
+    const selected = document.querySelector('.selected');
+    const proximo = selected.nextSibling;
+    if (selected !== lista.lastElementChild) {
+      lista.insertBefore(proximo, selected);
+    }
   }
 }
 

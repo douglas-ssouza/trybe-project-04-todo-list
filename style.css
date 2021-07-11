@@ -8,14 +8,12 @@
   text-decoration: line-through;
 }
 
-/*----------------------------------------------*/
-
 :root {
-  --dark-blue: #0e2d59;
-  --baby-blue: #63dde7;
-  --navy-blue: #0e3455;
-  --light-blue: #427b95;
-  --gray: #d4e4f1;
+  --dark-blue: rgb(14, 45, 89);
+  --baby-blue: rgb(99, 221, 231);
+  --navy-blue: rgb(14, 52, 85);
+  --light-blue: rgb(66, 123, 149);
+  --gray: rgb(212, 228, 241);
 }
 
 * {
@@ -25,7 +23,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: Poppins, sans-serif;
   font-size: 16px;
   background-color: var(--dark-blue);
 }
@@ -48,7 +46,7 @@ p {
   font-size: 1.3em;
 }
 
-h1, p, input {
+h1 , p , input {
   margin-bottom: 2%;
 }
 

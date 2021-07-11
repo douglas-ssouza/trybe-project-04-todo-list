@@ -8,6 +8,7 @@ const btnUp = document.getElementById('mover-cima');
 const btnDown = document.getElementById('mover-baixo');
 const btnRemSelected = document.getElementById('remover-selecionado');
 
+// Adiciona uma tarefa a lista
 function addTask() {
   const texto = input.value;
   const itemLista = document.createElement('li');
@@ -15,25 +16,23 @@ function addTask() {
   lista.appendChild(itemLista);
   input.value = '';
 }
-btnAdd.addEventListener('click', addTask);
-input.addEventListener('keyup', function() {
-  if (event.keyCode === 13) {
-    btnAdd.click();
-  }
-});
 
+// 8 - Não deve ser possível selecionar mais de um elemento da lista ao mesmo tempo
+// remove a classe selected de todos os elementos
 function removeSelected() {
   for (const item of lista.children) {
     item.classList.remove('selected');
   }
 }
 
+// 7 - Clicar em um item da lista deve alterar a cor de fundo do item para cinza rgb(128,128,128)
+// adidciona a classe selected ao elemento selecionado
 function selectItem(event) {
   removeSelected();
   event.target.classList.add('selected');
 }
-lista.addEventListener('click', selectItem);
 
+// Verifica se o elemento passado possui a classe completed
 function isCompleted(classes) {
   for (const classe of classes) {
     if (classe === 'completed') {
@@ -43,6 +42,7 @@ function isCompleted(classes) {
   return false;
 }
 
+// Verifica se o elemento passado possui a classe selected
 function isSelected(classes) {
   for (const classe of classes) {
     if (classe === 'selected') {
@@ -52,6 +52,7 @@ function isSelected(classes) {
   return false;
 }
 
+// Remove da lista o item com a classe selected
 function removeSeleceted() {
   for (let index = lista.children.length - 1; index >= 0; index -= 1) {
     if (isSelected(lista.children[index].classList)) {
@@ -60,8 +61,9 @@ function removeSeleceted() {
     }
   }
 }
-btnRemSelected.addEventListener('click', removeSeleceted);
 
+// 9 - Clicar duas vezes em um item, faz com que ele seja riscado, indicando que foi completo. Deve ser possível desfazer essa ação clicando novamente duas vezes no item
+// Adiciona ou remove a classe completed do elemento manipulado
 function completeTask(event) {
   const completed = isCompleted(event.target.classList);
 
@@ -71,8 +73,8 @@ function completeTask(event) {
     event.target.classList.add('completed');
   }
 }
-lista.addEventListener('dblclick', completeTask);
 
+// Remove da lista todos os elementos com a classe completed
 function removeCompleted() {
   for (let index = lista.children.length - 1; index >= 0; index -= 1) {
     if (isCompleted(lista.children[index].classList)) {
@@ -80,52 +82,53 @@ function removeCompleted() {
     }
   }
 }
-btnRemCompleted.addEventListener('click', removeCompleted);
 
+// Remove todas as tarefas da lista
 function clearList() {
   for (let index = lista.children.length - 1; index >= 0; index -= 1) {
     lista.removeChild(lista.children[index]);
   }
 }
-btnClear.addEventListener('click', clearList);
 
+// Move o elemento selecionado para cima na lista
 function moveUp() {
-  let move = false;
-  for (const item of lista.children) {
-    move = isSelected(item.classList);
-    if (move) {
-      const selected = document.querySelector('.selected');
-      const anterior = selected.previousSibling;
-      if (selected !== lista.firstElementChild) {
-        lista.insertBefore(selected, anterior);
-      }
-      break;
-    }
+  const selected = document.querySelector('.selected');
+  const anterior = selected.previousSibling;
+  if (selected !== lista.firstElementChild) {
+    lista.insertBefore(selected, anterior);
   }
 }
-btnUp.addEventListener('click', moveUp);
 
+// Move o elemento selecionado para baixo na lista
 function moveDown() {
-  let move = false;
-  for (const item of lista.children) {
-    move = isSelected(item.classList);
-    if (move) {
-      const selected = document.querySelector('.selected');
-      const proximo = selected.nextSibling;
-      if (selected !== lista.lastElementChild) {
-        lista.insertBefore(proximo, selected);
-      }
-      break;
-    }
+  const selected = document.querySelector('.selected');
+  const proximo = selected.nextSibling;
+  if (selected !== lista.lastElementChild) {
+    lista.insertBefore(proximo, selected);
   }
 }
-btnDown.addEventListener('click', moveDown);
 
+// Salva os dados da lista em localStorage
 function saveTasks() {
   localStorage.setItem('items', lista.innerHTML);
 }
+
+btnAdd.addEventListener('click', addTask);
+input.addEventListener('keyup', function() {
+  if (event.keyCode === 13) {
+    btnAdd.click();
+  }
+});
+lista.addEventListener('click', selectItem);
+lista.addEventListener('dblclick', completeTask);
+btnRemSelected.addEventListener('click', removeSeleceted);
+btnRemCompleted.addEventListener('click', removeCompleted);
+btnClear.addEventListener('click', clearList);
+btnUp.addEventListener('click', moveUp);
+btnDown.addEventListener('click', moveDown);
 btnSave.addEventListener('click', saveTasks);
 
+// Preenche a lista com os dados salvos ao carregar a página
 window.onload = function () {
   lista.innerHTML = localStorage.getItem('items');
 };
